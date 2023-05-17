@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DMS Forum</title>
+    <link rel="stylesheet" href="{% static 'pergunte.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+</head>
+<body>
+    <main class="pergunte">
+        <section class="pergunte__conteudo">
+            <h1 class="titulo-pergunte">PERGUNTE!</h1>
+            <form action="{% url 'index' %}" class="pergunte__conteudo__infos">
+                <label for="pergunta">Modulo:</label>
+                <select class="select2" multiple="multiple">
+                    <option value="opcao1">Cad. Basico</option>
+                    <option value="opcao2">Pricing</option>
+                    <option value="opcao3">CRM</option>
+                    <option value="opcao4">PM</option>
+                    <option value="opcao4">Operations</option>
+                    <option value="opcao5">DWSYS</option>
+                    <option value="opcao6">CLR</option>
+                    <option value="opcao7">DLC</option>
+                    <option value="opcao8">Financial</option>
+                    <option value="opcao9">Chamados</option>
+                    <option value="opcao10">OKR</option>
+                </select>
+                <label for="pergunta">Pergunta:</label>
+                <input type="text" id="pergunta" class="pergunte__conteudo__caixa" name="pergunta">
+                <input type="submit" class="pergunte__conteudo__botao" value="Enviar"> 
+            </form>
+        </section>
+    </main>
+</body>
+<script src="{% static 'script.js' %}"></script>
+</html>
