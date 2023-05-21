@@ -7,3 +7,7 @@ def index(request):
 
 def pergunte(request):
     return render(request, "modulos/pergunte.html")
+
+
+def responda(request):
+    return render(request, "modulos/responda.html")
