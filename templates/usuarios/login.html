@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DMS Forum</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}"/>
+</head>
+<body>
+<main class="login">
+    {% for message in messages %}
+    <div class="alert alert-primary">
+        <p id="messages">{{message}}</p>
+    </div>
+    {% endfor %}
+    <section>    
+        <img src="{% static './img/logodms.png' %}" alt="Logo da DMS">
+    </section>
+    <section class="login__conteudo">
+        <h1 class="titulo-login">Login</h1>
+        <form action="{% url 'login' %}" method="post" class="login__conteudo__form">
+            {% csrf_token %}
+            {% for field in form.visible_fields %}
+            <label for="{{ field.id_for_label }}">{{field.label}}</label>
+            {{ field }}
+            {% endfor %}
+            <button type="submit" class="login__conteudo__botao">Logar</button>
+        </form>
+    </section>
+</main>
+</body>
+</html>

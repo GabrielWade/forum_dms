@@ -47,11 +47,16 @@
             <th>Pergunta</th>
             <th>Responda</th>
         </tr>
+        {% if linha %}
+        {% for pergunta in linha %}
         <tr>
-            <td></td>
-            <td></td>
-            <td><a href="pergunta">Responda</a></td>
+            <td>{{ pergunta.modulo }}</td>
+            <td>{{ pergunta.pergunta }}</td>
+            <td><a href="{% url 'responda' %}">Responda</a></td>
         </tr>
+        {% endfor %}
+        {% else %}
+        {% endif %}
     </table>
 </body>
 

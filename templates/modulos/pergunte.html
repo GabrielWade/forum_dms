@@ -13,24 +13,14 @@
     <main class="pergunte">
         <section class="pergunte__conteudo">
             <h1 class="titulo-pergunte">PERGUNTE!</h1>
-            <form action="{% url 'index' %}" class="pergunte__conteudo__infos">
-                <label for="pergunta">Modulo:</label>
-                <select class="select2" multiple="multiple">
-                    <option value="opcao1">Cad. Basico</option>
-                    <option value="opcao2">Pricing</option>
-                    <option value="opcao3">CRM</option>
-                    <option value="opcao4">PM</option>
-                    <option value="opcao4">Operations</option>
-                    <option value="opcao5">DWSYS</option>
-                    <option value="opcao6">CLR</option>
-                    <option value="opcao7">DLC</option>
-                    <option value="opcao8">Financial</option>
-                    <option value="opcao9">Chamados</option>
-                    <option value="opcao10">OKR</option>
-                </select>
-                <label for="pergunta">Pergunta:</label>
-                <input type="text" id="pergunta" class="pergunte__conteudo__caixa" name="pergunta">
-                <input type="submit" class="pergunte__conteudo__botao" value="Enviar"> 
+            <form action="{% url 'pergunte' %}" method="post" class="pergunte__conteudo__infos">
+                {% csrf_token %}
+                {% for field in form.visible_fields %}
+                <label for="{{ field.id_for_label }}">{{field.label}}</label>
+                {{ field }}
+                {% endfor %}
+                <button type="submit" class="pergunte__conteudo__botao">perguntar</button>
+
             </form>
         </section>
     </main>
