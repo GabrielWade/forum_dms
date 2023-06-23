@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="{% static 'responda.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
 </head>
 <body>
     <nav class="navegacao">
@@ -41,23 +44,26 @@
             </form>
         </div>
     </main>
-    <table>
-        <tr>
-            <th>Módulo</th>
-            <th>Pergunta</th>
-            <th>Responda</th>
-        </tr>
-        {% if linha %}
-        {% for pergunta in linha %}
-        <tr>
-            <td>{{ pergunta.modulo }}</td>
-            <td>{{ pergunta.pergunta }}</td>
-            <td><a href="{% url 'responda' %}">Responda</a></td>
-        </tr>
-        {% endfor %}
-        {% else %}
-        {% endif %}
-    </table>
+
+    <div class="container">
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th>Módulo</th>
+                <th>Pergunta</th>
+                <th>Responda</th>
+            </tr>
+            {% if linha %}
+            {% for pergunta in linha %}
+            <tr>
+                <td>{{ pergunta.modulo }}</td>
+                <td><p class="text-break">{{ pergunta.pergunta }}</p></td>
+                <td><a href="{% url 'responda' %}">Responda</a></td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            {% endif %}
+        </table>
+    </div>
 </body>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

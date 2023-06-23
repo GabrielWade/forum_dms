@@ -49,16 +49,6 @@ body {
 }
 
 /* Tabela */
-
-table {
-    width: 90%;
-    margin: 3% 5%;
-}
-
-table, th, td {
-    border:1px solid black;
-}
-
 .filtro {
     display: flex;
     flex-direction: row;

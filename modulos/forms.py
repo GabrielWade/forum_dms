@@ -27,5 +27,5 @@ class PerguntaForm(forms.Form):
         label="Faça sua pergunta",
         required=True,
         max_length=50,
-        widget=forms.TextInput(attrs={"class": "pergunte__conteudo__caixa", 'placeholder': 'Ex.: Gabriel.Lima'}),
+        widget=forms.TextInput(attrs={"class": "pergunte__conteudo__caixa", 'placeholder': 'Ex.: O que é CRM?'}),
     )
