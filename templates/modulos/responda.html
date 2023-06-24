@@ -57,7 +57,7 @@
             <tr>
                 <td>{{ pergunta.modulo }}</td>
                 <td><p class="text-break">{{ pergunta.pergunta }}</p></td>
-                <td><a href="{% url 'responda' %}">Responda</a></td>
+                <td><a href="{% url 'respondaPergunta' pergunta.id %}">Responda</a></td>
             </tr>
             {% endfor %}
             {% else %}

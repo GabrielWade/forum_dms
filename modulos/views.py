@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from modulos.models import Pergunta
 from modulos.forms import PerguntaForm
 from django.contrib import messages
@@ -31,3 +31,6 @@ def responda(request):
     perguntas = Pergunta.objects.all()  
     return render(request, "modulos/responda.html", {"linha": perguntas})
 
+def respondaPergunta(request, pergunta_id):
+    pergunta = get_object_or_404(Pergunta, pk=pergunta_id)
+    return render(request,"modulos/respondaPergunta.html", {"pergunta": pergunta})
