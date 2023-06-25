@@ -1,30 +1,31 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DMS Forum</title>
-    <link rel="stylesheet" href="{% static 'pergunte.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-</head>
-<body>
-    <main class="pergunte">
-        <section class="pergunte__conteudo">
-            <h1 class="titulo-pergunte">PERGUNTE!</h1>
-            <form action="{% url 'pergunte' %}" method="post" class="pergunte__conteudo__infos">
-                {% csrf_token %}
-                {% for field in form.visible_fields %}
-                <label for="{{ field.id_for_label }}">{{field.label}}</label>
-                {{ field }}
-                {% endfor %}
-                <button type="submit" class="pergunte__conteudo__botao">perguntar</button>
+        <title>DMS Forum</title>
 
-            </form>
-        </section>
-    </main>
-</body>
-<script src="{% static 'script.js' %}"></script>
+        <link rel="stylesheet" href="{% static 'pergunte.css' %}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+    </head>
+    <body>
+        <main class="pergunte">
+            <section class="pergunte__conteudo">
+                <h1 class="titulo-pergunte">PERGUNTE!</h1>
+                <form action="{% url 'pergunte' %}" method="post" class="pergunte__conteudo__infos">
+                    {% csrf_token %}
+                    {% for field in form.visible_fields %}
+                    <label for="{{ field.id_for_label }}">{{field.label}}</label>
+                    {{ field }}
+                    {% endfor %}
+                    <button type="submit" class="pergunte__conteudo__botao">perguntar</button>
+
+                </form>
+            </section>
+        </main>
+    </body>
+    <script src="{% static 'script.js' %}"></script>
 </html>

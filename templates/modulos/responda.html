@@ -1,77 +1,56 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DMS Forum</title>
-    <link rel="stylesheet" href="{% static 'responda.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
-    {% load bootstrap5 %}
-    {% bootstrap_css %}
-    {% bootstrap_javascript %}
-</head>
-<body>
-    <nav class="navegacao">
-        <ul class="navegacao__lista">
-            <li><img class="navegacao__lista__imagem" src="{% static './img/logodms.png' %}" alt="Logo da DMS"></li>
-            <li class="navegacao__lista__link navegacao__lista__home"><a href="{% url 'index' %}">Home</a></li>
-        </ul>
-    </nav>
-    
-    <main class="filtro">
-        <section class="select2" multiple="multiple">
-            <option value="opcao1">Cad. Basico</option>
-            <option value="opcao2">Pricing</option>
-            <option value="opcao3">CRM</option>
-            <option value="opcao4">PM</option>
-            <option value="opcao4">Operations</option>
-            <option value="opcao5">DWSYS</option>
-            <option value="opcao6">CLR</option>
-            <option value="opcao7">DLC</option>
-            <option value="opcao8">Financial</option>
-            <option value="opcao9">Chamados</option>
-            <option value="opcao10">OKR</option>
-        </section>
+        <title>DMS Forum</title>
 
-        <div class="filtro__busca">
-            <form action="/action_page.php">
-                <input type="text" placeholder="Search.." name="search">
-                <button type="submit"><i class="fa fa-search"></i></button>
-            </form>
+        <link rel="stylesheet" href="{% static 'responda.css' %}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+
+        {% load bootstrap5 %}
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
+    </head>
+    <body>
+        <nav class="navegacao">
+            <ul class="navegacao__lista">
+                <li><img class="navegacao__lista__imagem" src="{% static './img/logodms.png' %}" alt="Logo da DMS"></li>
+                <li class="navegacao__lista__link navegacao__lista__home"><a href="{% url 'index' %}">Home</a></li>
+            </ul>
+        </nav>
+
+        <main class="filtro align-right">
+            <div class="filtro__busca">
+                <form action="/action_page.php">
+                    <input type="text" placeholder="Search.." name="search">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+        </main>
+
+        <div class="container">
+            <table class="table table-bordered table-striped">
+                <tr>
+                    <th>Módulo</th>
+                    <th>Pergunta</th>
+                    <th>Responda</th>
+                </tr>
+                {% if linha %}
+                {% for pergunta in linha %}
+                <tr>
+                    <td>{{ pergunta.modulo }}</td>
+                    <td><p class="text-break">{{ pergunta.pergunta }}</p></td>
+                    <td><a href="{% url 'respondaPergunta' pergunta.id %}">Responda</a></td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                {% endif %}
+            </table>
         </div>
-    </main>
-
-    <div class="container">
-        <table class="table table-bordered table-striped">
-            <tr>
-                <th>Módulo</th>
-                <th>Pergunta</th>
-                <th>Responda</th>
-            </tr>
-            {% if linha %}
-            {% for pergunta in linha %}
-            <tr>
-                <td>{{ pergunta.modulo }}</td>
-                <td><p class="text-break">{{ pergunta.pergunta }}</p></td>
-                <td><a href="{% url 'respondaPergunta' pergunta.id %}">Responda</a></td>
-            </tr>
-            {% endfor %}
-            {% else %}
-            {% endif %}
-        </table>
-    </div>
-</body>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-<script>
-    $(document).ready(function() {
-    $(".select2").select2();
-});
-</script>
-
+    </body>
 </html>

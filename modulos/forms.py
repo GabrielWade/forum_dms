@@ -26,6 +26,12 @@ class PerguntaForm(forms.Form):
     pergunta = forms.CharField(
         label="Faça sua pergunta",
         required=True,
-        max_length=50,
         widget=forms.TextInput(attrs={"class": "pergunte__conteudo__caixa", 'placeholder': 'Ex.: O que é CRM?'}),
+    )
+
+class RespondaForm(forms.Form):
+    resposta = forms.CharField(
+        label="Resposta:",
+        required=True,
+        widget=forms.Textarea(attrs={"class":"form-control", "id":"exampleFormControlTextarea1", "rows":"3"}),
     )

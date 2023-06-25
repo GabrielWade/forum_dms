@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from modulos.models import Pergunta
-from modulos.forms import PerguntaForm
+from modulos.models import Pergunta, Resposta
+from modulos.forms import PerguntaForm, RespondaForm
 from django.contrib import messages
 
 def index(request):
@@ -31,6 +31,23 @@ def responda(request):
     perguntas = Pergunta.objects.all()  
     return render(request, "modulos/responda.html", {"linha": perguntas})
 
+from django.shortcuts import get_object_or_404
+
 def respondaPergunta(request, pergunta_id):
+    if not request.user.is_authenticated:
+        messages.error(request, "Usuário não está logado.")
+        return redirect("login")
+
     pergunta = get_object_or_404(Pergunta, pk=pergunta_id)
-    return render(request,"modulos/respondaPergunta.html", {"pergunta": pergunta})
+
+    if request.method == "POST":
+        form = RespondaForm(request.POST)
+        if form.is_valid():
+            resposta_texto = form.cleaned_data["resposta"]
+            Resposta.objects.create(pergunta=pergunta, resposta=resposta_texto)
+            return redirect("respondaPergunta", pergunta_id=pergunta.id)
+    else:
+        form = RespondaForm()
+
+    return render(request, "modulos/respondaPergunta.html", {"pergunta": pergunta, "form": form})
+

@@ -49,20 +49,6 @@ body {
 }
 
 /* Tabela */
-.filtro {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between; 
-}
-
-.filtro {
-    margin: 0% 5% 0% 5%;
-}
-
-.select2 {
-    width: 20%;
-}   
 
 .filtro__busca button {
     float: right;
