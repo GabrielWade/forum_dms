@@ -8,14 +8,20 @@
 
         <title>DMS Forum</title>
 
-        <link rel="stylesheet" href="{% static 'style.css' %}"/>
+        {% load bootstrap5 %}
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
+
+        <link rel="stylesheet" href="{% static 'style/style.css' %}"/>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+
     </head>
-    <body>
+    <body style="background-color: #124376">
         {% for message in messages %}
-        <div class="alert alert-primary">
-            <p id="messages">{{message}}</p>
-        </div>
+            <div class="alert alert-primary">
+                <p id="messages">{{message}}</p>
+            </div>
         {% endfor %}
         <main class="modulo">
             <section>

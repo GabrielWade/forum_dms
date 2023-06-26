@@ -3,13 +3,19 @@
 <html lang="pt-br">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <link rel="stylesheet" href="{% static 'responda.css' %}">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <link rel="stylesheet" href="{% static 'respondaPergunta.css' %}">
+        <title>DMS Forum</title>
 
-        <title>RESPONDA!</title>
+        {% load bootstrap5 %}
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
+
+        <link rel="stylesheet" href="{% static 'style/style.css' %}">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+
     </head>
   <body>
     <nav class="navegacao">
@@ -19,7 +25,7 @@
         </ul>
     </nav>
     <section class="container">
-        <h1 class="titulo">RESPONDA!</h1>
+        <h1 class="titulo__responda">RESPONDA!</h1>
         <div class="resposta">
             <p class="respota__texto">{{ pergunta.pergunta }}</p>
         </div>
@@ -39,9 +45,5 @@
             <button type="submit" class="btn btn-success">RESPONDER</button>
         </form>
     </section>
-
-
-    <script src="{% static 'scriptResposta.js' %}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   </body>
 </html>

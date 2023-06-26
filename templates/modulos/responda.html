@@ -8,13 +8,14 @@
 
         <title>DMS Forum</title>
 
-        <link rel="stylesheet" href="{% static 'responda.css' %}">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
-
         {% load bootstrap5 %}
         {% bootstrap_css %}
         {% bootstrap_javascript %}
+
+        <link rel="stylesheet" href="{% static 'style/style.css' %}"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+
     </head>
     <body>
         <nav class="navegacao">
@@ -23,34 +24,30 @@
                 <li class="navegacao__lista__link navegacao__lista__home"><a href="{% url 'index' %}">Home</a></li>
             </ul>
         </nav>
-
-        <main class="filtro align-right">
-            <div class="filtro__busca">
-                <form action="/action_page.php">
-                    <input type="text" placeholder="Search.." name="search">
-                    <button type="submit"><i class="fa fa-search"></i></button>
-                </form>
+        <div class="container responda__body">
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+            <div>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Módulo</th>
+                        <th>Pergunta</th>
+                        <th>Responda</th>
+                    </tr>
+                    {% if linha %}
+                    {% for pergunta in linha %}
+                    <tr>
+                        <td>{{ pergunta.modulo }}</td>
+                        <td><p class="text-break">{{ pergunta.pergunta }}</p></td>
+                        <td><a class="btn btn-primary" href="{% url 'respondaPergunta' pergunta.id %}" role="button">Responda</></td>
+                    </tr>
+                    {% endfor %}
+                    {% else %}
+                    {% endif %}
+                </table>
             </div>
-        </main>
-
-        <div class="container">
-            <table class="table table-bordered table-striped">
-                <tr>
-                    <th>Módulo</th>
-                    <th>Pergunta</th>
-                    <th>Responda</th>
-                </tr>
-                {% if linha %}
-                {% for pergunta in linha %}
-                <tr>
-                    <td>{{ pergunta.modulo }}</td>
-                    <td><p class="text-break">{{ pergunta.pergunta }}</p></td>
-                    <td><a href="{% url 'respondaPergunta' pergunta.id %}">Responda</a></td>
-                </tr>
-                {% endfor %}
-                {% else %}
-                {% endif %}
-            </table>
         </div>
     </body>
 </html>
