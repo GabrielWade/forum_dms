@@ -5,5 +5,6 @@ urlpatterns = [
     path("", index, name="index"),
     path("pergunte/", pergunte, name="pergunte"),
     path("responda/", responda, name="responda"),
+    path("searchResult/", responda, name="searchResult"),
     path("respondaPergunta/<int:pergunta_id>", respondaPergunta, name="respondaPergunta")
 ]

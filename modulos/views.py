@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from modulos.models import Pergunta, Resposta
 from modulos.forms import PerguntaForm, RespondaForm
 from django.contrib import messages
-
+from django.db.models import Q
 def index(request):
     if not request.user.is_authenticated:
         messages.error(request, "Usuário não está logado.")
@@ -14,6 +14,7 @@ def pergunte(request):
     if not request.user.is_authenticated:
         messages.error(request, "Usuário não está logado.")
         return redirect("login")
+
     form = PerguntaForm(request.POST)
     if form.is_valid():
         pergunta = form["pergunta"].value()
@@ -28,10 +29,19 @@ def responda(request):
     if not request.user.is_authenticated:
         messages.error(request, "Usuário não está logado.")
         return redirect("login")
-    perguntas = Pergunta.objects.all()  
-    return render(request, "modulos/responda.html", {"linha": perguntas})
 
-from django.shortcuts import get_object_or_404
+    object_list = Pergunta.objects.all()
+    search = request.GET.get('search')
+
+    if search:
+        object_list = object_list.filter(
+            Q(modulo__icontains=search)
+            | Q(pergunta__icontains=search)
+        )
+        return render(request, "modulos/searchResult.html", {"object_list": object_list})
+    else:
+        perguntas = Pergunta.objects.all()
+        return render(request, "modulos/responda.html", {"linha": perguntas})
 
 def respondaPergunta(request, pergunta_id):
     if not request.user.is_authenticated:

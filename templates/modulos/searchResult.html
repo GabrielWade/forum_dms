@@ -24,7 +24,7 @@
             </ul>
         </nav>
         <div class="container responda__body">
-            <form class="d-flex" action="{% url 'searchResult' %}">
+            <form class="d-flex" action="#">
                 <input class="form-control me-2" name="search" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
@@ -35,15 +35,18 @@
                         <th>Pergunta</th>
                         <th>Responda</th>
                     </tr>
-                    {% if linha %}
-                    {% for pergunta in linha %}
-                    <tr>
-                        <td>{{ pergunta.modulo }}</td>
-                        <td><p class="text-break">{{ pergunta.pergunta }}</p></td>
-                        <td><a class="btn btn-primary" href="{% url 'respondaPergunta' pergunta.id %}" role="button">Responda</></td>
-                    </tr>
+                    {% if object_list %}
+                    {% for pergunta in object_list %}
+                        <tr>
+                            <td>{{ pergunta.modulo }}</td>
+                            <td><p class="text-break">{{ pergunta.pergunta }}</p></td>
+                            <td><a class="btn btn-primary" href="{% url 'respondaPergunta' pergunta.id %}" role="button">Responda</a></td>
+                        </tr>
                     {% endfor %}
                     {% else %}
+                        <tr>
+                            <td colspan="3">Nenhum resultado encontrado.</td>
+                        </tr>
                     {% endif %}
                 </table>
             </div>
