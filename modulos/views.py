@@ -9,7 +9,6 @@ def index(request):
         return redirect("login")
     return render(request, "modulos/index.html")
 
-
 def pergunte(request):
     if not request.user.is_authenticated:
         messages.error(request, "Usuário não está logado.")
@@ -30,7 +29,7 @@ def responda(request):
         messages.error(request, "Usuário não está logado.")
         return redirect("login")
 
-    object_list = Pergunta.objects.all()
+    object_list = Pergunta.objects.order_by("-data_pergunta").all()
     search = request.GET.get('search')
 
     if search:
@@ -40,7 +39,7 @@ def responda(request):
         )
         return render(request, "modulos/searchResult.html", {"object_list": object_list})
     else:
-        perguntas = Pergunta.objects.all()
+        perguntas = Pergunta.objects.order_by("-data_pergunta").all()
         return render(request, "modulos/responda.html", {"linha": perguntas})
 
 def respondaPergunta(request, pergunta_id):
