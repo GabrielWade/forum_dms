@@ -29,6 +29,12 @@ class PerguntaForm(forms.Form):
         widget=forms.TextInput(attrs={"class": "fundo__conteudo__caixa", 'placeholder': 'Ex.: O que é CRM?'}),
     )
 
+class VerificaForm(forms.Form):
+    verificaResposta = forms.BooleanField(
+        label="Dúvida respondida?",
+        required=False,
+        widget=forms.CheckboxInput(attrs={"class":"form-check-input", "id":"check2", "name":"option2"}),
+    )
 class RespondaForm(forms.Form):
     resposta = forms.CharField(
         label="Resposta:",

@@ -37,7 +37,7 @@
                     </tr>
                     {% if linha %}
                     {% for pergunta in linha %}
-                    <tr>
+                    <tr {% if pergunta.respondida %} class="linha__respondida" {% endif %}>
                         <td>{{ pergunta.modulo }}</td>
                         <td><p class="text-break">{{ pergunta.pergunta }}</p></td>
                         <td><a class="btn btn-primary" href="{% url 'respondaPergunta' pergunta.id %}" role="button">Responda</></td>

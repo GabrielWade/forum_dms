@@ -29,19 +29,31 @@
             <p class="respota__texto">{{ pergunta.pergunta }}</p>
         </div>
         {% for resposta in pergunta.respostas.all %}
-        <div class="resposta">
-            <p class="respota__texto">{{ resposta.resposta }}</p>
-        </div>
+            <div class="container__resposta">
+                <div class="resposta">
+                    <p class="respota__texto">{{ resposta.resposta }}</p>
+                </div>
+            </div>
         {% endfor %}
-        <form action="{% url 'respondaPergunta' pergunta.id  %}" method="POST">
+        <form action="{% url 'respondaPergunta' pergunta.id %}" method="POST" id="form-verifica">
             {% csrf_token %}
+            {{ form_verifica }}
+            {% for field in form.visible_fields %}
+                <label class="form-check-label"for="{{ field.id_for_label }}">{{field.label}}</label>
+                {{ field }}
+            {% endfor %}
+        </form>
+        <form action="{% url 'respondaPergunta' pergunta.id  %}" method="POST" id="form-resposta">
+            {% csrf_token %}
+            {{ form_resposta }}
             {% for field in form.visible_fields %}
                 <div class="mb-3">
                     <label for="exampleFormControlTextarea1" class="form-label" for="{{ field.id_for_label }}">{{field.label}}</label>
                     {{ field }}
                 </div>
             {% endfor %}
-            <button type="submit" class="btn btn-success">RESPONDER</button>
+            <button type="submit" class="btn btn-success" form="form-resposta">RESPONDER</button>
+            <button type="submit" class="btn btn-primary" form="form-verifica">SALVAR</button>
         </form>
     </section>
   </body>

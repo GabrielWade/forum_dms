@@ -148,7 +148,9 @@ ul li a {
 .tabela__perguntas {
     width: 100%;
 }
-
+.linha__respondida {
+    background-color: #b1c934;
+}
 .responda__body {
     display: flex;
     flex-direction: column;
@@ -164,8 +166,16 @@ ul li a {
     color: var(--cor-primaria);
 }
 
+.container__resposta {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+
 .resposta {
-    width: 20;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
     height: auto;
     padding: 10px;
     margin-bottom: 30px;
