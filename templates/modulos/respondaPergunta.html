@@ -35,7 +35,7 @@
                 </div>
             </div>
         {% endfor %}
-        <form action="{% url 'respondaPergunta' pergunta.id %}" method="POST" id="form-verifica">
+        <form action="{% url 'responda' %}" method="POST" id="form-verifica">
             {% csrf_token %}
             {{ form_verifica }}
             {% for field in form.visible_fields %}

@@ -35,17 +35,29 @@
                         <th>Pergunta</th>
                         <th>Responda</th>
                     </tr>
-                    {% if linha %}
-                    {% for pergunta in linha %}
+                    {% for pergunta in page_obj %}
                     <tr {% if pergunta.respondida %} class="linha__respondida" {% endif %}>
                         <td>{{ pergunta.modulo }}</td>
                         <td><p class="text-break">{{ pergunta.pergunta }}</p></td>
-                        <td><a class="btn btn-primary" href="{% url 'respondaPergunta' pergunta.id %}" role="button">Responda</></td>
+                        <td><a class="btn btn-primary" href="{% url 'respondaPergunta' pergunta.id %}" role="button">Responda</a></td>
                     </tr>
                     {% endfor %}
-                    {% else %}
-                    {% endif %}
                 </table>
+            </div>
+            <div class="pagination">
+                <span class="step-links">
+                    {% if page_obj.has_previous %}
+                        <a href="?page=1">&laquo; Primeira</a>
+                        <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+                    {% endif %}
+
+                    <span class="current-page">{{ page_obj.number }}</span>
+
+                    {% if page_obj.has_next %}
+                        <a href="?page={{ page_obj.next_page_number }}">Próxima</a>
+                        <a href="?page={{ page_obj.paginator.num_pages }}">Última &raquo;</a>
+                    {% endif %}
+                </span>
             </div>
         </div>
     </body>

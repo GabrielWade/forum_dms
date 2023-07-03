@@ -31,25 +31,21 @@ def responda(request):
         messages.error(request, "Usuário não está logado.")
         return redirect("login")
 
-    object_list = Pergunta.objects.order_by("-data_pergunta").all()
+    perguntas = Pergunta.objects.order_by("-data_pergunta").all()
+    paginator = Paginator(perguntas, 10)
     search = request.GET.get('search')
-
-    if search:
-        object_list = object_list.filter(
-            Q(modulo__icontains=search)
-            | Q(pergunta__icontains=search)
-        )
-        return render(request, "modulos/searchResult.html", {"object_list": object_list})
-    else:
-        perguntas = Pergunta.objects.order_by("-data_pergunta").all()
-        return render(request, "modulos/responda.html", {"linha": perguntas})
-
-    paginator = Paginator(object_list, 10)  # Defina o número de itens por página
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    return render(request, "modulos/responda.html", {"linha": page_obj})
+    if search:
+        page_obj = perguntas.filter(
+            Q(modulo__icontains=search)
+            | Q(pergunta__icontains=search)
+        )
+        return render(request, "modulos/responda.html", {"page_obj": page_obj})
+    else:
+        return render(request, "modulos/responda.html", {"page_obj": page_obj})
 
 
 def respondaPergunta(request, pergunta_id):
